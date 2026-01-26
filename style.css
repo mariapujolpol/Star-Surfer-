@@ -1,0 +1,20 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: black;
+}
+
+
+/* FIX BACKGROUND IMAGE */
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 430px;
+    background-image: url("./Star-Surfer-/images/Backgrounds/star_surfer_background.png");
+    background-size: cover;
+    background-position: center;
+    width: 900px;
+    height: 900px;
+    
+}
