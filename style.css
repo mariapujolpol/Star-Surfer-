@@ -1,20 +1,107 @@
 body {
-    margin: 0;
-    overflow: hidden;
-    background-color: black;
+  margin: 0;
+  background: black;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/*BACKGROUND GAME*/
+
+#background {
+  background: url("./Star-Surfer-/images/Backgrounds/ssbackground.png") center/cover no-repeat;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75%;
+  height: 100vh;
+  z-index: -1; /* Ensure background is behind other elements */
 }
 
 
-/* FIX BACKGROUND IMAGE */
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 
-#background {
-    position: fixed;
-    top: 0;
-    left: 430px;
-    background-image: url("./Star-Surfer-/images/Backgrounds/star_surfer_background.png");
-    background-size: cover;
-    background-position: center;
-    width: 900px;
-    height: 900px;
-    
+.hidden { display: none; }
+
+#game-screen {
+  position: relative;
+}
+
+
+#game-box {
+  width: 520px;
+  height: 650px;
+  margin-top: 220px;
+  position: relative;
+  overflow: hidden;
+  z-index: 2; /* Ensure game box is above the background */
+  border-radius: 20px;
+  background: url("./Star-Surfer-/images/Backgrounds/gamephoto.jpg") center/cover no-repeat;
+}
+
+/* HUD inside game-box */
+
+#hud {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#hud-score, #hud-time {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#hud-score img, #hud-time img {
+  height: 26px;
+  width: auto;
+}
+
+#score-value, #time-value {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* Start button inside game-box */
+#start-btn {
+  position: absolute;
+  bottom: 250px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+  
+}
+
+#start-btn img {
+  width: 350px;
+  height: auto;
+
+}
+
+/*PLAYER*/
+
+#player {
+  position: absolute;
+  bottom: 43px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: auto;
+  pointer-events: none;
 }
