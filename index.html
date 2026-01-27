@@ -1,79 +1,83 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Star Surfer</title>
-  <link rel="stylesheet" href="./style.css" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Star Surfer</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
 
-<body>
+  <body>
+    <!-- BACKGROUND -->
 
+    <div id="background"></div>
 
-  <!-- BACKGROUND -->
+    <!-- START SCREEN -->
 
-  <div id="background"></div>
+    <section id="start-screen" class="container">
+      <button id="start-btn" class="img-btn" type="button">
+        <img
+          src="./Star-Surfer-/images/Elements/BUTTONS/7a3e4b10-2770-4be7-9ad9-d335908845e5-md-removebg-preview.png"
+          alt="Start"
+        />
+      </button>
+    </section>
 
-  <!-- GAME SCREEN = START SCREEN -->
+    <!-- GAME SCREEN -->
 
-  <div id="game-screen" class="container">
-   <button id="start-btn" class="img-btn" type="button">
-      <img src="./Star-Surfer-/images/Elements/BUTTONS/start_surfingstartstart1212.png" alt="Start" />
-    </button>
-   
-    
-    <!-- GAME BOX --> 
+    <section id="game-screen" class="container hidden">
+      <div id="game-box">
 
-    <div id="game-box">
+        <!-- HUD -->
 
-    <!-- HUD -->
+        <div id="hud">
+          <div id="hud-score">
+            <img src="./Star-Surfer-/images/Time and Score/score_fin.png" alt="Score" />
+            <span id="score-value">0</span>
+          </div>
 
-    <div id="hud">
-      <div id="hud-score">
-        <img src="./Star-Surfer-/images/Time and Score/score_fin.png" alt="Score" />
-        <span id="score-value">0</span>
+          <div id="hud-time">
+            <img src="./Star-Surfer-/images/Time and Score/time.time.png" alt="Time" />
+            <span id="time-value">200</span>
+          </div>
+
+          <div id="hud-lives">
+            <img class="life" src="./Star-Surfer-/images/Elements/heart.png" alt="Life" />
+            <img class="life" src="./Star-Surfer-/images/Elements/heart.png" alt="Life" />
+            <img class="life" src="./Star-Surfer-/images/Elements/heart.png" alt="Life" />
+          </div>
+        </div>
+
+        <!-- PLAYER -->
+
+        <img id="player" src="./Star-Surfer-/images/Elements/player.png" alt="Player" />
       </div>
+    </section>
 
-      <div id="hud-time">
-        <img src="./Star-Surfer-/images/Time and Score/time.time.png" alt="Time" />
-        <span id="time-value">200</span>
+    <!-- GAME OVER (same game-box) -->
+
+    <section id="game-over-screen" class="container hidden">
+      <div class="end-box">
+        <img src="./Star-Surfer-/images/Backgrounds/gameover.png" alt="Game Over" />
+        <button id="restart-btn-1" class="restart-btn" type="button">
+          <img src="./Star-Surfer-/images/Elements/BUTTONS/surf_again.png" alt="Surf Again" />
+        </button>
       </div>
+    </section>
 
-      <div id="hud-lives">
-        <img class="life" src="./Star-Surfer-/images/Elements/heart.png" alt="Life" />
-        <img class="life" src="./Star-Surfer-/images/Elements/heart.png" alt="Life" />
-        <img class="life" src="./Star-Surfer-/images/Elements/heart.png" alt="Life" />
+    <!-- VICTORY (same game-box) -->
+     
+    <section id="victory-screen" class="container hidden">
+      <div class="end-box">
+        <img src="./Star-Surfer-/images/Backgrounds/legendaryvictory.png" alt="Victory" />
+        <button id="restart-btn-2" class="restart-btn" type="button">
+          <img src="./Star-Surfer-/images/Elements/BUTTONS/surf_again.png" alt="Surf Again" />
+        </button>
       </div>
-    </div>
+    </section>
 
-   <img id="player" src="./Star-Surfer-/images/Elements/player.png" alt="Player" />
-
-   </div>
-    
-
-  <!-- GAME OVER -->
-
-  <section id="game-over-screen" class="container hidden">
-    <img src="./Star-Surfer-/images/Backgrounds/gameover.png" alt="Game Over" />
-    <button class="restart-btn" type="button">
-      <img src="./Star-Surfer-/images/Elements/BUTTONS/surf_again.png" alt="Surf Again" />
-    </button>
-  </section>
-
-  <!-- VICTORY -->
-
-  <section id="victory-screen" class="container hidden">
-    <img src="./Star-Surfer-/images/Backgrounds/legendaryvictory.png" alt="Game Victory" />
-    <button class="restart-btn" type="button">
-      <img src="./Star-Surfer-/images/Elements/BUTTONS/surf_again.png" alt="Surf Again" />
-    </button>
-  </section>
-  
- <script src="./meteorite.js"></script> 
-<script src="./main.js"></script>
-
-
-</body>
-
-
+    <script src="./meteorite.js"></script>
+    <script src="./stars.js"></script>
+    <script src="./main.js"></script>
+  </body>
 </html>

@@ -5,19 +5,20 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/*BACKGROUND GAME*/
+/* BACKGROUND fixed*/
 
 #background {
-  background: url("./Star-Surfer-/images/Backgrounds/ssbackground.png") center/cover no-repeat;
+  background: url("./Star-Surfer-/images/Backgrounds/2350dfcf-14f2-4593-ae32-c4a4d28f8a53.png") center/cover no-repeat;
   position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 75%;
   height: 100vh;
-  z-index: -1; /* Ensure background is behind other elements */
+  z-index: -1;
 }
 
+/* SCREENS */
 
 .container {
   width: 100vw;
@@ -28,12 +29,39 @@ body {
   position: relative;
 }
 
-.hidden { display: none; }
-
-#game-screen {
-  position: relative;
+.hidden {
+  display: none;
 }
 
+/* END SCREENS BOX (same size as game-box) */
+
+.end-box {
+  width: 520px;
+  height: 650px;
+  margin-top: 220px;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  border-radius: 20px;
+
+  /* BACKGROUND GAME */
+  background: url("./Star-Surfer-/images/Backgrounds/gamephoto.jpg") center/cover no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.end-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+/* GAME BOX */
 
 #game-box {
   width: 520px;
@@ -41,16 +69,12 @@ body {
   margin-top: 220px;
   position: relative;
   overflow: hidden;
-  z-index: 2; /* Ensure game box is above the background */
+  z-index: 2;
   border-radius: 20px;
   background: url("./Star-Surfer-/images/Backgrounds/gamephoto.jpg") center/cover no-repeat;
-  
-}
-.meteorite {
-  pointer-events: none;
 }
 
-/* HUD inside game-box */
+/* HUD */
 
 #hud {
   position: absolute;
@@ -61,57 +85,79 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 25px;
-  
 }
 
-#hud-score, #hud-time {
+#hud-score,
+#hud-time {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
-#hud-score img, #hud-time img {
-  height: auto;
+#hud-score img,
+#hud-time img {
   width: 120px;
+  height: auto;
+  pointer-events: none;
 }
 
-#score-value, #time-value {
+#score-value,
+#time-value {
   color: white;
   font-weight: bold;
   font-size: 25px;
 }
 
-/* Start button inside game-box */
-#start-btn {
-  position: absolute;
-  bottom: 250px;
-  left: 50%;
-  transform: translateX(-50%);
+/* LIVES */
+
+#hud-lives {
+  display: flex;
+  gap: 6px;
+}
+
+.life {
+  width: 30px;
+  height: auto;
+  pointer-events: none;
+}
+
+/* BUTTONS */
+
+#start-btn,
+.restart-btn {
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 3;
-  margin: 0;
   display: inline-block;
   line-height: 0;
 }
 
 #start-btn img {
-  width: 300px;
+  width: 650px;
   height: auto;
   display: block;
   pointer-events: none;
 }
 
-/*PLAYER*/
+/* PLAYER */
 
 #player {
   position: absolute;
   bottom: 43px;
   left: 0;
-  transform: none;
   width: 160px;
   height: auto;
-  display: block;
+  pointer-events: none;
+}
+
+/* METEOR */
+
+.meteorite {
+  pointer-events: none;
+}
+
+/* STAR */
+
+.star {
   pointer-events: none;
 }
