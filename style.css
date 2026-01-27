@@ -44,6 +44,10 @@ body {
   z-index: 2; /* Ensure game box is above the background */
   border-radius: 20px;
   background: url("./Star-Surfer-/images/Backgrounds/gamephoto.jpg") center/cover no-repeat;
+  
+}
+.meteorite {
+  pointer-events: none;
 }
 
 /* HUD inside game-box */
@@ -56,6 +60,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 25px;
+  
 }
 
 #hud-score, #hud-time {
@@ -65,14 +71,14 @@ body {
 }
 
 #hud-score img, #hud-time img {
-  height: 26px;
-  width: auto;
+  height: auto;
+  width: 120px;
 }
 
 #score-value, #time-value {
   color: white;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 /* Start button inside game-box */
@@ -85,13 +91,16 @@ body {
   border: none;
   cursor: pointer;
   z-index: 3;
-  
+  margin: 0;
+  display: inline-block;
+  line-height: 0;
 }
 
 #start-btn img {
-  width: 350px;
+  width: 300px;
   height: auto;
-
+  display: block;
+  pointer-events: none;
 }
 
 /*PLAYER*/
@@ -99,9 +108,10 @@ body {
 #player {
   position: absolute;
   bottom: 43px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  transform: none;
   width: 160px;
   height: auto;
+  display: block;
   pointer-events: none;
 }
