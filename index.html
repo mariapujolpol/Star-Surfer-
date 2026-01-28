@@ -9,11 +9,9 @@
 
   <body>
     <!-- BACKGROUND -->
-
     <div id="background"></div>
 
     <!-- START SCREEN -->
-
     <section id="start-screen" class="container">
       <button id="start-btn" class="img-btn" type="button">
         <img
@@ -24,20 +22,23 @@
     </section>
 
     <!-- GAME SCREEN -->
-
     <section id="game-screen" class="container hidden">
       <div id="game-box">
-
         <!-- HUD -->
-
         <div id="hud">
           <div id="hud-score">
-            <img src="./Star-Surfer-/images/Time and Score/sscooooooreeeeee.png" alt="Score" />
+            <img
+              src="./Star-Surfer-/images/Time and Score/sscooooooreeeeee.png"
+              alt="Score"
+            />
             <span id="score-value">0</span>
           </div>
 
           <div id="hud-time">
-            <img src="./Star-Surfer-/images/Time and Score/9052674c-a4de-4779-a1e7-af7a489d23d5.png" alt="Time" />
+            <img
+              src="./Star-Surfer-/images/Time and Score/9052674c-a4de-4779-a1e7-af7a489d23d5.png"
+              alt="Time"
+            />
             <span id="time-value">60</span>
           </div>
 
@@ -48,14 +49,12 @@
           </div>
         </div>
 
-        <!-- PLAYER -->
-
-        <img id="player" src="./Star-Surfer-/images/Elements/player.png" alt="Player" />
+        <!-- IMPORTANTE: NO pongas <img id="player"> aquí
+             porque Player.js lo crea con JS -->
       </div>
     </section>
 
-    <!-- GAME OVER (same game-box) -->
-
+    <!-- GAME OVER -->
     <section id="game-over-screen" class="container hidden">
       <div class="end-box">
         <img src="./Star-Surfer-/images/Backgrounds/gameover.png" alt="Game Over" />
@@ -65,8 +64,7 @@
       </div>
     </section>
 
-    <!-- VICTORY (same game-box) -->
-     
+    <!-- VICTORY -->
     <section id="victory-screen" class="container hidden">
       <div class="end-box">
         <img src="./Star-Surfer-/images/Backgrounds/legendaryvictory.png" alt="Victory" />
@@ -76,8 +74,10 @@
       </div>
     </section>
 
+    <!-- SCRIPTS (orden correcto) -->
     <script src="./meteorite.js"></script>
     <script src="./stars.js"></script>
+    <script src="./player.js"></script>
     <script src="./main.js"></script>
   </body>
 </html>

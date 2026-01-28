@@ -11,13 +11,15 @@ class Meteor {
     this.width = 80;
     this.height = 80;
 
-    this.x = Math.random() * (this.gameBox.clientWidth - this.width);
+    this.x = Math.random() * (this.gameBox.clientWidth - this.width); /*es la posición horizontal aleatoria para los meteoritos*/
     this.y = -this.height;
 
     this.speed = Math.floor (Math.random() * 3) + 1;
 
+
+
     this.node.style.position = "absolute";
-    this.node.style.width = `${this.width}px`;
+    this.node.style.width = `${this.width}px`; 
     this.node.style.height = `${this.height}px`;
     this.node.style.left = `${this.x}px`;
     this.node.style.top = `${this.y}px`;
@@ -29,3 +31,4 @@ class Meteor {
   }
   
 }
+

@@ -1,4 +1,4 @@
-/* DOM */ // Save with variables to the elements from the HTML
+/* DOM */ /*Guardo las referencias a elementos del HTML una sola vez y luego reutilizo*/
 // screens
 const startScreenNode = document.querySelector("#start-screen");
 const gameScreenNode = document.querySelector("#game-screen");
@@ -12,41 +12,45 @@ const restartBtn2Node = document.querySelector("#restart-btn-2");
 
 // game box + hud
 const gameBoxNode = document.querySelector("#game-box");
-const playerNode = document.querySelector("#player");
-
 const scoreValueNode = document.querySelector("#score-value");
 const timeValueNode = document.querySelector("#time-value");
 
 
-//* GLOBAL GAME VARIABLES
-// I save here all the variables
+// music
+const hitSound = new Audio("Star-Surfer-/Music/Meteorite Hit.wav");
+hitSound.volume = 0.4;
+const starSound = new Audio("./Star-Surfer-/Music/starsound.mp3");
+
+starSound.volume = 0.3;
+const backgroundMusic = new Audio("Star-Surfer-/Music/backmusic.mp3"); //*
+backgroundMusic.loop = true;
+backgroundMusic.volume = 0.4; //volumen 0 a 1
+/*Si un querySelector devuelve null (porque el elemento no existe en el HTML obviamente)
+
+/* GLOBAL GAME VARIABLES */
+/*Estas son v globales porque todo el juego necesita acceder y modificarlas*/
+
 let score = 0;
 let timeLeft = 60;
 let lives = 3;
 
+let playerObj = null;
 
-// I save here all the interval IDs
+/* interval IDs */
 let gameIntervalId = null;
 let timerIntervalId = null;
 let meteorSpawnIntervalId = null;
 let starSpawnIntervalId = null;
 
-// player data object to store position, size, speed etc
-const playerData = {
-  x: 0,
-  w: 140,
-  h: 50,
-  speed: 20,
-};
-
-// arrays to hold meteor and star objects
+/* arrays */
 let meteorArr = [];
 let starArr = [];
 
+/* FUNCTIONS */
 
-//* GLOBAL GAME FUNCTIONS
 
-//hides all screens and shows only the selected one
+/*En showScreen uso la clase hidden en vez de style.display porque separo la lógica (JS) del estilo/diseño (CSS)*, en JS pone y  o quita clases y CSS decide como se ve*/
+/*Oculos todas las pantallas para que nunca queden dos pantallas visibles a la vez*/ 
 
 function showScreen(screenToShow) {
   startScreenNode.classList.add("hidden");
@@ -57,83 +61,70 @@ function showScreen(screenToShow) {
   screenToShow.classList.remove("hidden");
 }
 
-//adds score and time to the hud 
 function updateHud() {
   scoreValueNode.textContent = score;
   timeValueNode.textContent = timeLeft;
 }
 
-
-//centers the playyer at teh center of the game box
-function centerPlayer() {
-  playerData.x = gameBoxNode.clientWidth / 2 - playerData.w / 2;
-  playerNode.style.left = `${playerData.x}px`;
-}
-
-
-//avoid de player to go outside the game box/screen
-function keepPlayerInside() {
-  const minX = 0;
-  const maxX = gameBoxNode.clientWidth - playerData.w;
-
-  if (playerData.x < minX) playerData.x = minX;
-  if (playerData.x > maxX) playerData.x = maxX;
-}
-
-function getPlayerY() {
-  const bottom = 43;
-  return gameBoxNode.clientHeight - bottom - playerData.h;
-}
-
-
-/** EVENT LISTENERS */
-
 function startGame() {
-  // 1. change states of the screens
+  // 1) show game screen
   showScreen(gameScreenNode);
 
-  // 2. reset state
+  showScreen(gameScreenNode);
+
+  backgroundMusic.currentTime = 0;
+  backgroundMusic.play();
+
+  // 2) reset state
   score = 0;
   timeLeft = 60;
   lives = 3;
 
-  // 3. update UI + position
+  // 3) UI
   updateHud();
-  centerPlayer();
 
-  // 4. remove old objects from previous games
+  // 4) remove old objects
   meteorArr.forEach((m) => m.node.remove());
   starArr.forEach((s) => s.node.remove());
   meteorArr = [];
   starArr = [];
 
-  // 5. stop ALL intervals (safety)
+  // 5) stop intervals (safety)
   stopGame();
 
-  // 6. start the game loop
-  gameIntervalId = setInterval(gameLoop, Math.round(1000 / 60)); // 60fps game loop
+  // 6) reset player
+  if (playerObj) playerObj.remove();
+  playerObj = new Player(gameBoxNode);
 
-  // 7. start spawn intervals
+  // 7) start loops
+  gameIntervalId = setInterval(gameLoop, Math.round(1000 / 60)); // Necesito un loop para el juego para poder actualizar constantemente; mover obj, comprobar colisiones...Sin loop no hay juego.
+                                                  //1000/60 es estandar para juegos (60fps)
   meteorSpawnIntervalId = setInterval(spawnMeteor, 900);
   starSpawnIntervalId = setInterval(spawnStar, 1200);
 
-  // 8. start timer
+  // 8) timer
   startTimer();
 }
 
 function gameLoop() {
-  // all automated movements and all collision checks
+
 
   // meteors
-  meteorArr.forEach((meteorObj) => meteorObj.move());
+  meteorArr.forEach((m) => m.move());
   meteorDespawnCheck();
   collisionPlayerMeteor();
+  
+  
 
   // stars
-  starArr.forEach((starObj) => starObj.move());
+  starArr.forEach((s) => s.move());
   starDespawnCheck();
   collisionPlayerStar();
 }
+
+
+
+
 
 function stopGame() {
   clearInterval(gameIntervalId);
@@ -142,7 +133,7 @@ function stopGame() {
   clearInterval(starSpawnIntervalId);
 }
 
-/*Spawn Functions*/
+/* SPAWN */
 function spawnMeteor() {
   const meteorObj = new Meteor(gameBoxNode);
   meteorArr.push(meteorObj);
@@ -153,13 +144,10 @@ function spawnStar() {
   starArr.push(starObj);
 }
 
-
-/*Checks to despawn meteors and stars*/
-
+/* DESPAWN */
 function meteorDespawnCheck() {
   if (meteorArr.length === 0) return;
 
-  // remove meteors that have left the game box
   while (meteorArr.length > 0 && meteorArr[0].y > gameBoxNode.clientHeight) {
     meteorArr[0].node.remove();
     meteorArr.shift();
@@ -169,17 +157,14 @@ function meteorDespawnCheck() {
 function starDespawnCheck() {
   if (starArr.length === 0) return;
 
-  // remove stars that have left the game box
   while (starArr.length > 0 && starArr[0].y > gameBoxNode.clientHeight) {
     starArr[0].node.remove();
     starArr.shift();
   }
 }
 
-
-/*COLLISIONS*/
-
-function checkCollision(obj1, obj2) { //AABB collision detection
+/* COLLISIONS */
+function checkCollision(obj1, obj2) {
   return (
     obj1.x < obj2.x + obj2.width &&
     obj1.x + obj1.width > obj2.x &&
@@ -189,12 +174,8 @@ function checkCollision(obj1, obj2) { //AABB collision detection
 }
 
 function collisionPlayerMeteor() {
-  const playerObj = {
-    x: playerData.x,
-    y: getPlayerY(),
-    width: playerData.w,
-    height: playerData.h,
-  };
+  if (!playerObj) return;
+  const playerRect = playerObj.getRect();
 
   meteorArr.forEach((meteorObj) => {
     const meteorRect = {
@@ -204,9 +185,12 @@ function collisionPlayerMeteor() {
       height: meteorObj.height,
     };
 
-    const isColliding = checkCollision(playerObj, meteorRect);
+    const isColliding = checkCollision(playerRect, meteorRect);
 
     if (isColliding) {
+      hitSound.currentTime = 0;
+      hitSound.play();
+
       meteorObj.node.remove();
       meteorArr = meteorArr.filter((m) => m !== meteorObj);
       loseLife();
@@ -215,12 +199,8 @@ function collisionPlayerMeteor() {
 }
 
 function collisionPlayerStar() {
-  const playerObj = {
-    x: playerData.x,
-    y: getPlayerY(),
-    width: playerData.w,
-    height: playerData.h,
-  };
+  if (!playerObj) return;
+  const playerRect = playerObj.getRect();
 
   starArr.forEach((starObj) => {
     const starRect = {
@@ -230,9 +210,12 @@ function collisionPlayerStar() {
       height: starObj.height,
     };
 
-    const isColliding = checkCollision(playerObj, starRect);
+    const isColliding = checkCollision(playerRect, starRect);
 
     if (isColliding) {
+      starSound.currentTime = 0;
+      starSound.play();
+
       starObj.node.remove();
       starArr = starArr.filter((s) => s !== starObj);
 
@@ -242,8 +225,7 @@ function collisionPlayerStar() {
   });
 }
 
-
-/* Lives and Game Over/Win */
+/* LIVES + END SCREENS */
 function loseLife() {
   lives--;
 
@@ -253,21 +235,41 @@ function loseLife() {
 }
 
 function gameOver() {
-  // 1. stop all intervals
   stopGame();
 
-  // 2. change states of the screens
+  // limpiar objetos del juego (para que no se queden encima)
+  meteorArr.forEach((m) => m.node.remove());
+  starArr.forEach((s) => s.node.remove());
+  meteorArr = [];
+  starArr = [];
+
+  // quitar player
+  if (playerObj) {
+    playerObj.remove();
+    playerObj = null;
+  }
+
   showScreen(gameOverScreenNode);
 }
 
 function winGame() {
   stopGame();
+
+  meteorArr.forEach((m) => m.node.remove());
+  starArr.forEach((s) => s.node.remove());
+  meteorArr = [];
+  starArr = [];
+
+  if (playerObj) {
+    playerObj.remove();
+    playerObj = null;
+  }
+
   showScreen(victoryScreenNode);
 }
 
 
-/*Timer*/
-
+/* TIMER */
 function startTimer() {
   clearInterval(timerIntervalId);
 
@@ -281,44 +283,15 @@ function startTimer() {
   }, 1000);
 }
 
-
-//* EVENT LISTENERS
-
+/* EVENT LISTENERS */
 startBtnNode.addEventListener("click", startGame);
 
-restartBtn1Node.addEventListener("click", startGame);
-restartBtn2Node.addEventListener("click", startGame);
+if (restartBtn1Node) restartBtn1Node.addEventListener("click", startGame);
+if (restartBtn2Node) restartBtn2Node.addEventListener("click", startGame);
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowLeft") playerData.x -= playerData.speed;
-  if (event.key === "ArrowRight") playerData.x += playerData.speed;
+  if (!playerObj) return;
 
-  keepPlayerInside();
-  playerNode.style.left = `${playerData.x}px`;
+  if (event.key === "ArrowLeft") playerObj.moveLeft();
+  if (event.key === "ArrowRight") playerObj.moveRight();
 });
-
-
-
-/* STRUCTURE of the JS FILE:
-
-// DOM
-// buttons
-// game box + hud
-// start screen
-// game screen
-// game over screen
-// victory screen
-
-// GLOBAL GAME VARIABLES  
-
-// functions
-// spawn functions
-// collision functions
-// event listeners
-
-// EVENT LISTENERS
-// start button
-// restart buttons
-// player movement
-// any other event listeners
-*/  
