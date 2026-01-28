@@ -14,7 +14,7 @@ class Meteor {
     this.x = Math.random() * (this.gameBox.clientWidth - this.width);
     this.y = -this.height;
 
-    this.speed = 2;
+    this.speed = Math.floor (Math.random() * 3) + 1;
 
     this.node.style.position = "absolute";
     this.node.style.width = `${this.width}px`;
