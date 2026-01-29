@@ -14,6 +14,8 @@ const restartBtn2Node = document.querySelector("#restart-btn-2");
 const gameBoxNode = document.querySelector("#game-box");
 const scoreValueNode = document.querySelector("#score-value");
 const timeValueNode = document.querySelector("#time-value");
+const livesContainerNode = document.querySelector("#hud-lives");
+
 /*Si un querySelector devuelve null (porque el elemento no existe en el HTML obviamente)*/
 
 // music
@@ -25,6 +27,7 @@ starSound.volume = 0.3;
 const backgroundMusic = new Audio("Star-Surfer-/Music/backmusic.mp3"); //*
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.4; //volumen 0 a 1
+
 
 
 /* GLOBAL GAME VARIABLES */
@@ -82,6 +85,7 @@ function startGame() {
 
   // 3) UI
   updateHud();
+  updateLivesHud();
 
   // 4) remove old objects
   meteorArr.forEach((m) => m.node.remove());
@@ -122,7 +126,14 @@ function gameLoop() {
   collisionPlayerStar();
 }
 
+function updateLivesHud() {
+  const hearts = livesContainerNode.querySelectorAll(".life");
 
+  hearts.forEach((heart, index) => {
+    heart.style.visibility = index < lives ? "visible" : "hidden";
+    }
+  );
+}
 
 
 
@@ -228,11 +239,14 @@ function collisionPlayerStar() {
 /* LIVES + END SCREENS */
 function loseLife() {
   lives--;
+  updateLivesHud();
 
   if (lives <= 0) {
     gameOver();
   }
 }
+
+
 
 function gameOver() {
   stopGame();
