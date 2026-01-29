@@ -1,10 +1,16 @@
 class Star {
-
-  constructor(gameBox) {
+  constructor(gameBox, isSuperStar = false) {
     this.gameBox = gameBox;
+    this.isSuperStar = isSuperStar;
 
     this.node = document.createElement("img");
-    this.node.src = "./Star-Surfer-/images/Elements/star.png";
+
+    if (this.isSuperStar) { // Si es una superestrella modificamos la imagen 
+      this.node.src = "./Star-Surfer-/images/Elements/superstar.png";
+    } else {
+      this.node.src = "./Star-Surfer-/images/Elements/star.png";
+    }
+
     this.node.className = "star";
     this.gameBox.appendChild(this.node);
 
@@ -27,5 +33,6 @@ class Star {
     this.y += this.speed;
     this.node.style.top = `${this.y}px`;
   }
-  
 }
+
+//Modificado para añadir la super estrella//

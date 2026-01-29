@@ -22,8 +22,9 @@ const livesContainerNode = document.querySelector("#hud-lives");
 const hitSound = new Audio("Star-Surfer-/Music/Meteorite Hit.wav");
 hitSound.volume = 0.4;
 const starSound = new Audio("./Star-Surfer-/Music/starsound.mp3");
-
 starSound.volume = 0.3;
+const superStarSound = new Audio("./Star-Surfer-/Music/superstar.mp3");
+superStarSound.volume = 0.5;
 const backgroundMusic = new Audio("Star-Surfer-/Music/backmusic.mp3"); //*
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.4; //volumen 0 a 1
@@ -145,15 +146,26 @@ function stopGame() {
 }
 
 /* SPAWN */
+
 function spawnMeteor() {
   const meteorObj = new Meteor(gameBoxNode);
   meteorArr.push(meteorObj);
 }
 
 function spawnStar() {
-  const starObj = new Star(gameBoxNode);
+  const isSuperStar = Math.random() < 0.15;
+  const starObj = new Star(gameBoxNode, isSuperStar);
   starArr.push(starObj);
 }
+
+
+
+
+/*Solo estrella normal pero como añado la siperestrella, dejo el código comentado para referencia futura*/
+/*function spawnStar() {
+  const starObj = new Star(gameBoxNode);
+  starArr.push(starObj);
+}*/ 
 
 /* DESPAWN */
 function meteorDespawnCheck() {
@@ -211,6 +223,7 @@ function collisionPlayerMeteor() {
 
 function collisionPlayerStar() {
   if (!playerObj) return;
+
   const playerRect = playerObj.getRect();
 
   starArr.forEach((starObj) => {
@@ -221,16 +234,23 @@ function collisionPlayerStar() {
       height: starObj.height,
     };
 
-    const isColliding = checkCollision(playerRect, starRect);
-
-    if (isColliding) {
+    if (checkCollision(playerRect, starRect)) {
       starSound.currentTime = 0;
       starSound.play();
 
       starObj.node.remove();
       starArr = starArr.filter((s) => s !== starObj);
 
-      score += 10;
+ 
+   if (starObj.isSuperStar) {
+    superStarSound.currentTime = 0;
+    superStarSound.play();
+  score += 50;
+} else {
+  score += 10;
+}
+
+
       updateHud();
     }
   });
