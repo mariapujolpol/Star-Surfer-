@@ -14,7 +14,7 @@ const restartBtn2Node = document.querySelector("#restart-btn-2");
 const gameBoxNode = document.querySelector("#game-box");
 const scoreValueNode = document.querySelector("#score-value");
 const timeValueNode = document.querySelector("#time-value");
-
+/*Si un querySelector devuelve null (porque el elemento no existe en el HTML obviamente)*/
 
 // music
 const hitSound = new Audio("Star-Surfer-/Music/Meteorite Hit.wav");
@@ -25,10 +25,10 @@ starSound.volume = 0.3;
 const backgroundMusic = new Audio("Star-Surfer-/Music/backmusic.mp3"); //*
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.4; //volumen 0 a 1
-/*Si un querySelector devuelve null (porque el elemento no existe en el HTML obviamente)
+
 
 /* GLOBAL GAME VARIABLES */
-/*Estas son v globales porque todo el juego necesita acceder y modificarlas*/
+/*Estas son v globales porque todo el juego necesita acceder y modificar estas*/
 
 let score = 0;
 let timeLeft = 60;
@@ -99,8 +99,8 @@ function startGame() {
   // 7) start loops
   gameIntervalId = setInterval(gameLoop, Math.round(1000 / 60)); // Necesito un loop para el juego para poder actualizar constantemente; mover obj, comprobar colisiones...Sin loop no hay juego.
                                                   //1000/60 es estandar para juegos (60fps)
-  meteorSpawnIntervalId = setInterval(spawnMeteor, 900);
-  starSpawnIntervalId = setInterval(spawnStar, 1200);
+  meteorSpawnIntervalId = setInterval(spawnMeteor, 2200); //menos meteoritos
+  starSpawnIntervalId = setInterval(spawnStar, 1200); //mas  estrellas
 
   // 8) timer
   startTimer();

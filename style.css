@@ -8,7 +8,7 @@ body {
 /* BACKGROUND fixed*/
 
 #background {
-  background: url("./Star-Surfer-/images/Backgrounds/2350dfcf-14f2-4593-ae32-c4a4d28f8a53.png") center/cover no-repeat;
+  background: url("./Star-Surfer-/images/Backgrounds/backgroundphoto.png") center/cover no-repeat;
   position: fixed;
   top: 0;
   left: 50%;
@@ -51,7 +51,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 25px;
+  gap: 25px; /* space between elements */
 }
 
 .end-box img {
@@ -145,10 +145,12 @@ body {
   position: absolute;
   bottom: 43px;
   left: 0;
-  width: 160px;
+  width: 70px;
   height: auto;
   pointer-events: none;
 }
+
+
 
 /* METEOR */
 

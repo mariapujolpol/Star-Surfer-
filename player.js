@@ -2,31 +2,32 @@ class Player {
   constructor(gameBox) {
     this.gameBox = gameBox;
 
-    // 1) create node
+    //node ceation
     this.node = document.createElement("img");
-    this.node.src = "./Star-Surfer-/images/Elements/player.png"; 
+    this.node.src = "./Star-Surfer-/images/Elements/player_cropped.png"; 
     this.node.id = "player";
     this.node.className = "player";
     this.gameBox.appendChild(this.node);
 
-    // 2) size
-    this.width = 150;
+    //size
+    this.width = 70;
     this.height = 100;
 
-    // 3) position
+    // position
     this.bottomOffset = 43;
     this.x = this.gameBox.clientWidth / 2 - this.width / 2;
     this.y = this.gameBox.clientHeight - this.bottomOffset - this.height;
 
-    // 4) speed
+    // speed
     this.speed = 20;
 
-    // 5) styles
+    //  styles
     this.node.style.position = "absolute";
     this.node.style.width = `${this.width}px`;
     this.node.style.height = `${this.height}px`;
     this.draw();
   }
+// methods
 
   draw() {
     this.node.style.left = `${this.x}px`;
@@ -60,3 +61,9 @@ class Player {
     this.node.remove();
   }
 }
+
+
+
+
+
+
