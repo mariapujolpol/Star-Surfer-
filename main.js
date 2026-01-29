@@ -153,7 +153,7 @@ function spawnMeteor() {
 }
 
 function spawnStar() {
-  const isSuperStar = Math.random() < 0.15;
+  const isSuperStar = Math.random() < 0.10; // 10% de probabilidad de que sea una superestrella
   const starObj = new Star(gameBoxNode, isSuperStar);
   starArr.push(starObj);
 }
