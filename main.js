@@ -19,20 +19,15 @@ const livesContainerNode = document.querySelector("#hud-lives");
 /*Si un querySelector devuelve null (porque el elemento no existe en el HTML obviamente)*/
 
 // music
-// music
-const hitSound = new Audio("./Star-Surfer-/music/meteorite.wav");
+const hitSound = new Audio("Star-Surfer-/Music/meteorite.wav");
 hitSound.volume = 0.4;
-
-const starSound = new Audio("./Star-Surfer-/music/starsound.mp3");
+const starSound = new Audio("./Star-Surfer-/Music/starsound.mp3");
 starSound.volume = 0.3;
-
-const superStarSound = new Audio("./Star-Surfer-/music/superstar.mp3");
+const superStarSound = new Audio("./Star-Surfer-/Music/superstar.mp3");
 superStarSound.volume = 0.5;
-
-const backgroundMusic = new Audio("./Star-Surfer-/music/backmusic.mp3");
+const backgroundMusic = new Audio("Star-Surfer-/Music/backmusic.mp3"); //*
 backgroundMusic.loop = true;
-backgroundMusic.volume = 0.4;
- //volumen 0 a 1
+backgroundMusic.volume = 0.4; //volumen 0 a 1
 
 
 
@@ -215,17 +210,14 @@ function collisionPlayerMeteor() {
 
     const isColliding = checkCollision(playerRect, meteorRect);
 
-   if (isColliding) {
-  const sfx = hitSound.cloneNode();
-  sfx.volume = 0.4;
-  sfx.currentTime = 0;
-  sfx.play().catch(() => {});
+    if (isColliding) {
+      hitSound.currentTime = 0;
+      hitSound.play();
 
-  meteorObj.node.remove();
-  meteorArr = meteorArr.filter((m) => m !== meteorObj);
-  loseLife();
-}
-
+      meteorObj.node.remove();
+      meteorArr = meteorArr.filter((m) => m !== meteorObj);
+      loseLife();
+    }
   });
 }
 
@@ -326,35 +318,10 @@ function startTimer() {
 }
 
 /* EVENT LISTENERS */
-startBtnNode.addEventListener("click", () => {
-  // unlock hit sound on user gesture (GitHub Pages)
-  hitSound.play().then(() => {
-    hitSound.pause();
-    hitSound.currentTime = 0;
-  }).catch(() => {});
+startBtnNode.addEventListener("click", startGame);
 
-  startGame();
-});
-
-if (restartBtn1Node)
-  restartBtn1Node.addEventListener("click", () => {
-    hitSound.play().then(() => {
-      hitSound.pause();
-      hitSound.currentTime = 0;
-    }).catch(() => {});
-
-    startGame();
-  });
-
-if (restartBtn2Node)
-  restartBtn2Node.addEventListener("click", () => {
-    hitSound.play().then(() => {
-      hitSound.pause();
-      hitSound.currentTime = 0;
-    }).catch(() => {});
-
-    startGame();
-  });
+if (restartBtn1Node) restartBtn1Node.addEventListener("click", startGame);
+if (restartBtn2Node) restartBtn2Node.addEventListener("click", startGame);
 
 document.addEventListener("keydown", (event) => {
   if (!playerObj) return;
