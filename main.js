@@ -19,7 +19,7 @@ const livesContainerNode = document.querySelector("#hud-lives");
 /*Si un querySelector devuelve null (porque el elemento no existe en el HTML obviamente)*/
 
 // music
-const hitSound = new Audio("Star-Surfer-/Music/Meteorite Hit.wav");
+const hitSound = new Audio("./Star-Surfer-/music/meteorite.wav");
 hitSound.volume = 0.4;
 const starSound = new Audio("./Star-Surfer-/Music/starsound.mp3");
 starSound.volume = 0.3;
