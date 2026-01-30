@@ -1,0 +1,96 @@
+🚀 Star Surfer 🚀
+
+Star Surfer is a fast-paced arcade game inspired by Subway Surfers, set in a space universe.
+The player controls an astronaut who must dodge meteorites, collect stars, and survive until the time runs out.
+
+Simple mechanics, addictive gameplay, and constant challenge make Star Surfer a fun and dynamic experience.
+
+
+🎮 How to Play?
+
+
+· Move the astronaut left and right to avoid meteorites                         
+
+· Collect normal stars ⭐ to earn 10 points                                   · If you survive until the timer ends → Victory
+
+· Collect super stars 🌟 to earn 50 points                                    · You start with 3 lives
+
+· If you lose all lives → Game Over                                            · Manage wisely to survive. Make strategic moves and stay alert!
+
+
+
+🕹️ Controls:
+
+Keyboard:
+
+← Move left
+
+→ Move right
+
+
+🧠 Game Features:
+
+· Object-oriented JavaScript (classes for player, meteorites, and stars)                    · Victory Screen
+
+· Collision detection                                                                       · Sound effects for collisions and star collection
+
+· Multiple screens:                                                                         · Score, timer, and lives HUD
+
+  - Start Screen                                                                            · Two types of collectibles (normal star & super star)
+
+  - Game Screen
+
+  - Game Over Screen
+
+
+🛠️ Technologies Used:
+
+· HTML5                             · DOM manipulation
+
+· CSS                               · Git & GitHub
+
+· JavaScript                        · AI Tools
+ 
+
+
+📌 Project Structure
+Star-Surfer-
+│
+├── index.html
+├── style.css
+├── main.js
+├── /images
+│   ├── Backgrounds
+│   ├── Elements
+│   └── Time and Score
+├── /Music
+└── README.md
+
+💡 Learnings & Challenges: 
+
+This project had highs and lows.
+HTML and CSS were smooth, but JavaScript — especially collisions and classes — was challenging.
+
+The biggest learning was starting a project from scratch, structuring the code, and thinking like a developer.
+
+If I had more time, I would add more features and polish the gameplay even further.
+
+
+🌱 Future Improvements: 
+
+More levels or increasing difficulty
+
+Power-ups
+
+Mobile controls
+
+High score system
+
+More animations and visual effects
+
+
+
+👉 Play the game here:
+[https://mariapujolpol.github.io/Star-Surfer-/]
+
+Ready to surf the stars? Let’s play! ✨🧑‍🚀
