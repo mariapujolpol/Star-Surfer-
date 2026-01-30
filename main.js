@@ -215,14 +215,17 @@ function collisionPlayerMeteor() {
 
     const isColliding = checkCollision(playerRect, meteorRect);
 
-    if (isColliding) {
-      hitSound.currentTime = 0;
-      hitSound.play();
+   if (isColliding) {
+  const sfx = hitSound.cloneNode();
+  sfx.volume = 0.4;
+  sfx.currentTime = 0;
+  sfx.play().catch(() => {});
 
-      meteorObj.node.remove();
-      meteorArr = meteorArr.filter((m) => m !== meteorObj);
-      loseLife();
-    }
+  meteorObj.node.remove();
+  meteorArr = meteorArr.filter((m) => m !== meteorObj);
+  loseLife();
+}
+
   });
 }
 
@@ -323,10 +326,35 @@ function startTimer() {
 }
 
 /* EVENT LISTENERS */
-startBtnNode.addEventListener("click", startGame);
+startBtnNode.addEventListener("click", () => {
+  // unlock hit sound on user gesture (GitHub Pages)
+  hitSound.play().then(() => {
+    hitSound.pause();
+    hitSound.currentTime = 0;
+  }).catch(() => {});
 
-if (restartBtn1Node) restartBtn1Node.addEventListener("click", startGame);
-if (restartBtn2Node) restartBtn2Node.addEventListener("click", startGame);
+  startGame();
+});
+
+if (restartBtn1Node)
+  restartBtn1Node.addEventListener("click", () => {
+    hitSound.play().then(() => {
+      hitSound.pause();
+      hitSound.currentTime = 0;
+    }).catch(() => {});
+
+    startGame();
+  });
+
+if (restartBtn2Node)
+  restartBtn2Node.addEventListener("click", () => {
+    hitSound.play().then(() => {
+      hitSound.pause();
+      hitSound.currentTime = 0;
+    }).catch(() => {});
+
+    startGame();
+  });
 
 document.addEventListener("keydown", (event) => {
   if (!playerObj) return;
